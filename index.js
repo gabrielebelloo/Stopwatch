@@ -8,7 +8,6 @@ let counter = 0;
 
 let laps = [];
 
-
 const secondsElement = document.querySelectorAll('.seconds');
 const minutesElement = document.querySelectorAll('.minutes');
 const centesimalsElement = document.querySelectorAll('.centesimals');
@@ -17,11 +16,15 @@ centesimalsElement.forEach((value) => value.innerHTML = centesimals);
 secondsElement.forEach((value) => value.innerHTML = seconds);
 minutesElement.forEach((value) => value.innerHTML = minutes);
 
+document.querySelector('.start-stop-button').addEventListener('click', () => startTimer());
+document.querySelector('.reset-button').addEventListener('click', () => resetTimer());
+
 let isStarted = false;
 
 renderLaps();
 
 
+// Generates and renders the HTML for the timer
 function renderLaps () {
   let lapsHTML = '';
 
@@ -49,7 +52,7 @@ function renderLaps () {
 }
 
 
-
+// Starts the Timer
 function startTimer() {
   if (!isStarted) {
     isStarted = true;
@@ -85,6 +88,7 @@ function startTimer() {
 }
 
 
+// Resets the timer
 function resetTimer() {
   if (!isStarted) {
     clearInterval(intervalId);
@@ -105,6 +109,7 @@ function resetTimer() {
 }
 
 
+// Deals with creating a lap
 function createLap () {
   counter++;
   laps.push({
@@ -113,12 +118,6 @@ function createLap () {
     minutes,
     counter
   });
-
   document.querySelector('.lap-name').innerHTML = `Lap ${counter + 1}`;
-
   renderLaps();
 }
-
-
-document.querySelector('.start-stop-button').addEventListener('click', () => startTimer());
-document.querySelector('.reset-button').addEventListener('click', () => resetTimer());
